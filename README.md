@@ -163,7 +163,7 @@ The pstack pack assumed Cursor's tools, model slugs and built-in skills. The mat
 | `create-skill` | the `writing-for-agents` skill, vendored here |
 | `/loop`, `/goal` | an autonomous-run request; a goal file plus the `todo` list |
 | cloud agents, Cursor dashboard | local `task` items; `hub list` / `hub jobs`; `~/.omp/agent/sessions/` |
-| `git show origin/main:pstack/skills/…` | `skill://<name>` |
+| `git show origin/master:pstack/skills/…` | `skill://<name>` |
 | `.cursor/worktrees` | `omp worktree list --json` |
 
 ## License
