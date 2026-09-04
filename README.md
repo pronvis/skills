@@ -1,13 +1,13 @@
 # skills
 
-Agent skills for the omp (Oh My Pi) coding agent: 70 vendored from three upstreams and ported to omp conventions, plus one written here.
+Agent skills for the omp (Oh My Pi) coding agent: 70 vendored from three upstreams and ported to omp conventions, plus one authored here. This repo is the only skill source omp loads; `~/.agents/skills` is empty by design.
 
 | Upstream | Pinned at | Skills | Path |
 |---|---|---|---|
 | [cursor/plugins](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166) | `7314f72` | 43 | `pstack/skills`, `cursor-team-kit/skills` |
 | [mattpocock/skills](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015) | `3cca18b` | 25 | `skills/engineering`, `skills/productivity` |
 | [affaan-m/ECC](https://github.com/affaan-m/ECC/blob/e04ea0b9cc8248686edf5ac751cadff550e162b8) | `e04ea0b` | 2 | `skills` |
-| original | — | 1 | — |
+| yours | n/a | 1 | authored in this repo |
 
 `skills/` holds the skill packs, one directory each. `agents/` holds omp task-agent definitions, symlinked into `~/.omp/agent/agents/`. Register the pack by adding this to `~/.omp/agent/config.yml`:
 
@@ -17,7 +17,7 @@ skills:
     - /Users/pronvis/it/skills/skills
 ```
 
-Legend. Each skill name links to its vendored `SKILL.md`; the Source column links the upstream original, or reads `original` for skills written here. **✱** the text was rewritten for omp; unmarked skills are byte-identical to upstream. **●** the model may auto-select it; the other 51 carry upstream's `disable-model-invocation: true` and are reached with `/skill:<name>` or by reading `skill://<name>`.
+Legend. Each skill name links to its vendored `SKILL.md`; the Source column links the upstream original. **✱** the text was rewritten for omp; unmarked skills are byte-identical to upstream. **●** the model may auto-select it; the other 51 carry upstream's `disable-model-invocation: true` and are reached with `/skill:<name>` or by reading `skill://<name>`.
 
 
 ## Entry point (pstack)
@@ -45,12 +45,6 @@ Legend. Each skill name links to its vendored `SKILL.md`; the Source column link
 | [`why`](skills/why/SKILL.md) ✱ | Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/skills/why/SKILL.md) |
 | [`pstack-tdd`](skills/pstack-tdd/SKILL.md) | Use only when the user explicitly asks for TDD, a failing test, or a regression test, OR when the bug has an obvious cheap local test target. (upstream `tdd`) | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/skills/tdd/SKILL.md) |
 | [`typescript-best-practices`](skills/typescript-best-practices/SKILL.md) | TypeScript best practices. Use when reading or editing any .ts or .tsx file. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/skills/typescript-best-practices/SKILL.md) |
-
-## Coordination (original)
-
-| Skill | Purpose | Source |
-|---|---|---|
-| [`coordinator-prompt`](skills/coordinator-prompt/SKILL.md) ● | Generate a multi-agent coordinator prompt file from a GitHub issue or parent issue graph: waves, branches and worktrees, implementer/reviewer/fixer briefs, blocking-findings list, gates, PR, final report. | original |
 
 ## Verification (pstack, cursor-team-kit)
 
@@ -130,6 +124,12 @@ Legend. Each skill name links to its vendored `SKILL.md`; the Source column link
 |---|---|---|
 | [`rust-patterns`](skills/rust-patterns/SKILL.md) ● | Idiomatic Rust patterns, ownership, error handling, traits, concurrency, and best practices for building safe, performant applications. | [affaan-m/ECC](https://github.com/affaan-m/ECC/blob/e04ea0b9cc8248686edf5ac751cadff550e162b8/skills/rust-patterns/SKILL.md) |
 | [`rust-testing`](skills/rust-testing/SKILL.md) ● | Rust testing patterns including unit tests, integration tests, async testing, property-based testing, mocking, and coverage. Follows TDD methodology. | [affaan-m/ECC](https://github.com/affaan-m/ECC/blob/e04ea0b9cc8248686edf5ac751cadff550e162b8/skills/rust-testing/SKILL.md) |
+
+## Yours
+
+| Skill | Purpose | Source |
+|---|---|---|
+| [`coordinator-prompt`](skills/coordinator-prompt/SKILL.md) | Generate a multi-agent coordinator prompt file from a GitHub issue or parent issue graph — waves, worktrees, implementer/reviewer/fixer briefs, gates, PR. | authored locally |
 
 ## Task agents
 

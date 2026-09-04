@@ -1,14 +1,14 @@
 ---
 name: coordinator-prompt
-description: Generate a multi-agent coordinator prompt file from a GitHub issue or parent issue graph — waves, branches and worktrees, implementer/reviewer/fixer briefs, blocking-findings list, gates, PR, final report. Use when asked to build, write, or refresh a prompt for implementing an issue, ticket, slice, or epic with orchestrated subagents.
+description: Generate a multi-agent coordinator prompt file from a GitHub issue or parent issue graph — waves, branches and worktrees, implementer/reviewer/fixer briefs, blocking-findings list, gates, PR, final report.
 disable-model-invocation: true
 ---
 
-Turn a GitHub issue into the prompt a coordinator session is pasted, so the orchestration is decided here — on cheap research — rather than improvised mid-run by an agent already holding eight subagent reports.
+Turn a GitHub issue into the prompt a coordinator session runs, so the orchestration is decided here — on cheap research — rather than improvised mid-run by an agent already holding eight subagent reports.
 
-The artifact is a file under the workspace `prompts/` directory. Its skeleton, and the boilerplate briefs that never vary, live in [`TEMPLATE.md`](TEMPLATE.md). Read it before drafting.
+Your deliverable is one file under the workspace `prompts/` directory. [`TEMPLATE.md`](TEMPLATE.md) holds its skeleton, the boilerplate briefs that never vary, the house rules every generated prompt carries, and the small and sequential variants. Read it before shaping.
 
-You produce the prompt. You never execute it: no branch, worktree, or subagent dispatch belongs to this skill.
+You produce the prompt; the coordinator session pasted it owns every branch, worktree and dispatch.
 
 ## 1. Resolve the target
 
@@ -16,12 +16,12 @@ Accept `#N`, a GitHub URL, `issue://owner/repo/N`, or an epic/slice name. Then:
 
 - **Repo directory**: the sibling of `prompts/` whose `git -C <dir> remote get-url origin` matches the issue's repo. `prompts/` is not itself a git repo. A cross-repo issue the ticket names is read through `gh` from any repo directory; its clone is only needed when the prompt must cite that repo's files or history.
 - **Fetch** `gh issue view <N> --json title,state,body,comments` for the target and every parent, child, and cross-repo issue it names. One non-interactive call each: `--comments` prints nothing when piped and truncates long bodies. Children are GitHub's sub-issue list reconciled against the body's list; a child in one and not the other is a report line.
-- **Precedence.** Every source in the graph is dated, and the later decision wins: a comment outranks the body it answers, a parent's comment outranks a child's body, an issue body outranks an older ADR or `CLAUDE.md` line (the prompt then names the amendment), a spec commit on the spec repo's default branch outranks a comment that cited an older revision, and a closed sibling's closing comment outranks a body claim it invalidated. Collect every override as a row — source that lost → source that won → the brief that lands it — and carry them in the prompt's `PRECEDENCE` block. A decision that lives only in a comment and is never written down is the failure this step exists to prevent.
+- **Precedence.** Every source in the graph is dated, and the later decision wins: a comment outranks the body it answers, a parent's comment outranks a child's body, an issue body outranks an older ADR or `CLAUDE.md` line (the prompt then names the amendment), a spec commit on the spec repo's default branch outranks a comment that cited an older revision, and a closed sibling's closing comment outranks a body claim it invalidated. Every override becomes a `PRECEDENCE` row in the prompt, because a decision that lives only in a comment is the one the run loses.
 - **Dependencies.** A dependency named in any form — a `Blocked by:` field, or a "depends on" / "remains dependent on" sentence — is a decision, not a stop: either the prompt proceeds against a contract or pin (naming the artifact that stands in for the missing dependency) or the work waits. When the issue names several outcomes with different dependencies, say which outcome each open dependency gates. Ask in step 4 if the issue does not settle it.
 
 ## 2. Fan out research
 
-One `task` batch, `scout` agents, concurrent. Each returns file paths and quoted lines, never prose summaries.
+One `task` batch, `scout` agents, concurrent. Each returns file paths and quoted lines as the evidence for every claim it makes.
 
 Research the **default branch, not the working tree**: `git show <default>:<path>`, `git grep <pattern> <default> -- <paths>`. A checkout sitting on a feature branch, or a dirty tree, is the user's — often a previous attempt at this very issue; reading it would make the prompt describe finished work as what exists. Name it untouchable in the prompt and say so in the report. Pre-existing worktrees get `git log --oneline <default>..<branch>` — subjects only, never the tree: a subject that mints a primitive or seam a ticket here needs is a step-4 question, and the prompt says which build owns it and defers the other.
 
@@ -38,7 +38,7 @@ Three shapes. Pick on **file ownership**, not ticket count, and defend the pick 
 - **Sequential** — the collision that survives that seam: two tickets rewriting the same function body, the same router or service file, or the same seed rows. Not a wave: one branch, one commit per item, the enabling item first. Parallel branches here buy only merge conflicts that a fixer must re-integrate into what one implementer would have written once.
 - **Small** — one ticket with no shared prerequisite: three phases on one branch.
 
-A ticket already closed and merged is an entry condition, never work to recreate. Shared files get one named default owner plus a `hub` message as the way in for the other ticket (waves), or the append-only rule (sequential).
+A ticket already closed and merged is an entry condition, never work to recreate.
 
 ## 4. Ask once
 
@@ -48,10 +48,8 @@ One `ask` round, only for what research cannot answer:
 - push + PR vs branch-only;
 - a model-routing pin; a review-round cap other than three;
 - the scope of riders a pin or contract move drags in — default: only what the gates force, everything else reported as a follow-up with its repo named;
-- every wire behaviour a handler cannot avoid answering that neither the issue graph nor the contract settles, each with the default you propose.
+- every wire behaviour a handler cannot avoid answering that neither the issue graph nor the contract settles, each with the default you propose;
 - a ticket that lists its own alternative resolutions and picks none — ask which, proposing the cheapest one no open upstream issue blocks.
-
-Skip every question the issue graph already answers, and never ask what `gh` or the repo can tell you.
 
 ## 5. Draft, then sharpen
 
@@ -69,15 +67,3 @@ Fill every `TEMPLATE.md` slot; delete what research found irrelevant — a whole
 Write `prompts/<repo>_issue_<N>_prompt.md`. `<repo>_slice_<N>_prompt.md` is for an epic — a parent whose sub-issues each become their own wave item; a parent whose comments settle one slice across its children is an issue. A set of siblings with no parent is `<repo>_set_<slug>_prompt.md`, where `<slug>` is the branch segment the prompt mints (`implementation/<slug>/…`). Check `<repo>_issue_<N>` and the legacy unprefixed `issue_<N>` before writing: an existing prompt for the same issue is refreshed in place, not duplicated under a second name.
 
 Report: the file path, the wave or phase table, the shape decision with its evidence, which decisions came from comments rather than bodies, and every gap left for the user — each with the exact question and why research could not close it.
-
-## House invariants
-
-These hold in every generated prompt; they are why the briefs in `TEMPLATE.md` read the way they do.
-
-**Dispatch.** The coordinator owns every dispatch, fixed point, review verdict, fix commit, merge, gate run, push and PR. Implementers never dispatch a reviewer or fixer — nesting them costs the reviewer its own review axes. One `task` call per phase carrying every item of that wave; wait for the batch to settle before the next phase. Agents are named by role (`task` to implement, `reviewer`, `fixer`); models come from omp config, so a prompt naming a model inside a child task changes nothing — state routing as a preflight the coordinator verifies, or leave it out.
-
-**Review loop.** Implement → independent review against a captured fixed point → fixer on blocking findings only → re-review against the same fixed point. Three rounds max in a wave, two in the small variant; a branch still blocking at the cap is reported, not merged. The fixer does not commit; the coordinator inspects and commits. A finding that is a deliberate issue decision is rejected in the report, naming the contract line — not silently obeyed.
-
-**Git.** Integration branch from a captured base; one branch and worktree per ticket from that integration base, at whatever path the repo's own precedent uses; wave order already encodes dependencies, so no ticket branches off a sibling. Non-fast-forward merges in a stated order. Never commit to the default branch, never push before gates are green, never reset/delete/clean an unexpected branch or worktree. The user's untracked files — the prompt files themselves — and pre-existing worktrees are left untouched. The small and sequential variants use one worktree too, whenever the repo's precedent is one per issue or the root checkout must stay on the default branch.
-
-**Verification.** Implementers run only their named tests and narrow typechecks; the coordinator runs the project-wide gates once, at the end, from the integration worktree. A red gate goes to a fixer with the exact failure, then reruns.

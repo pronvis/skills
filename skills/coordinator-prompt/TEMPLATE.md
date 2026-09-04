@@ -1,17 +1,15 @@
 # The prompt skeleton
 
-Sections in this order. `{{slot}}` is filled from research; a section or line the work does not have is deleted, never left empty. Lines marked `(conditional)` are kept only when research found the thing they name — a backend repo has no QA manifest or copy layer, and a reviewer told to check one will hunt for a file that never existed.
+Sections in this order. `{{slot}}` is filled from research. Lines marked `(conditional)` are kept only when research found the thing they name — a backend repo has no QA manifest or copy layer, and a reviewer told to check one will hunt for a file that never existed.
 
 Prose in the briefs is copied verbatim. It is the part that does not vary between issues, and rewriting it per issue is how a constraint gets lost.
-
-The file opens with `Here is your task:` and ends with the final-report demand.
 
 ---
 
 ```text
 Here is your task:
 
-Implement {{issue-uri}}{{ + " (with " + companion-uris + ")" if any }} as {{one line: what
+Implement {{issue-uri}}{{, with <companion-uris> — only when the ticket names companions}} as {{one line: what
 shape — a waved multi-agent build on one integration branch / a sequential single-branch
 build, one commit per item / a three-phase build on one branch}}: {{the waves or items in
 one sentence}}.
@@ -52,11 +50,10 @@ ENTRY CONDITION:
 WHAT EXISTS (consume, never recreate):
   - {{path}} — {{symbol(s)}}: {{what it already answers}}
   - {{generated / vendored files and pins that are never hand-edited}}
-  - {{the current checkout, if it is not the default branch or the tree is dirty}} is the
-    user's work. Never check it out, commit, stash, reset or clean it.
-  - Untracked root files ({{the prompt files}}) and every existing worktree
-    ({{git worktree list output}}) are the user's. Never add, edit, delete, stash, commit,
-    reset or clean them.
+  - The user's, and read-only: {{the current checkout, if it is not the default branch or
+    the tree is dirty}}, the untracked root files ({{the prompt files}}), and every
+    existing worktree ({{git worktree list output}}). Leave each exactly as found — no
+    checkout, edit, add, delete, stash, commit, reset or clean.
 
 GIT BASELINE:
   - BASE = local {{default branch}} HEAD ({{assertion it must satisfy}}; never hardcode a
@@ -71,8 +68,9 @@ GIT BASELINE:
     the expected base and no unrelated work; otherwise stop and report. Never reset,
     delete or overwrite an unexpected one.
   - Implementers commit on their branch; the coordinator commits fixer output, merges,
-    {{pushes and opens the PR / prints the push and PR commands and stops}}. Nothing is
-    pushed before the integration review is clean and the gates are green.
+    {{pushes and opens the PR / prints the push and PR commands and stops}}. Every commit
+    lands on the integration branch or a ticket branch, never on {{default branch}};
+    nothing is pushed before the integration review is clean and the gates are green.
   - Commit subjects follow this repo's history: {{observed convention}}.
 
 ONE-TIME APPROVAL GATE:
@@ -124,8 +122,8 @@ push and the PR; implementers never dispatch their own reviewer/fixer):
   Wave 3 — gates (coordinator, once, in {{integration worktree}})
     {{the exact commands, in CI's order and CI's spelling}}
     {{commands deliberately skipped, with the reason and what replaces them}}
-    A red gate → `fixer` with the exact failure → rerun. Never push red. Do not commit
-    format-only churn outside touched files.
+    A red gate → `fixer` with the exact failure → rerun. Do not commit format-only churn
+    outside touched files.
 
   Wave 4 — push + PR
     git push -u origin {{integration branch}}
@@ -249,7 +247,7 @@ Then the gates, once, and the ending the user chose — push + PR, or the printe
 
 ## The sequential variant
 
-Several tickets whose diffs land in the same files: one branch, one commit per item, in an order where the enabling item lands first. Keep every section above, with `ORCHESTRATION` as three phases:
+Several tickets whose diffs land in the same files: one branch `{{implementation/issue_N}}` — in a worktree on the same precedent as the small variant — with one commit per item, in an order where the enabling item lands first. Keep every section above, with `ORCHESTRATION` as three phases:
 
 - **Phase A** — the enabling item (the shared projection, fixture, harness, or registry key) implemented by one `task` agent, then its `reviewer` / `fixer` loop, then commit and record `BASE_A`. Everything else assumes it.
 - **Phase B** — the remaining items in order, one `task` agent and one commit each, no review between them. Each gets a `## Item N — {{what gets an owner}}` section carrying **Target** (paths, plus the exact `grep` that found its consumers), the change, and the test that proves it.
