@@ -15,3 +15,7 @@ Every reference in a Markdown file carries a real target: a URL for anything on 
 
 - Wrong: `[openapi#73]`, ``[`typescript-best-practices`]``
 - Right: `[openapi#73](https://github.com/Inkflockteam/openapi/issues/73)`, ``[`typescript-best-practices`](skills/typescript-best-practices/SKILL.md)``
+
+## Chat replies
+
+Apply `skill://unslop` to all chat replies.
