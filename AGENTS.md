@@ -1,5 +1,9 @@
 # Global rules
 
+## Chat replies
+
+Apply `skill://unslop` to all chat replies.
+
 ## Cross-repo references
 
 Shorthand issue/PR references only resolve inside the current repository. When referencing an issue or PR in another repo, use the full URL, not `repo#N`.
@@ -15,7 +19,3 @@ Every reference in a Markdown file carries a real target: a URL for anything on 
 
 - Wrong: `[openapi#73]`, ``[`typescript-best-practices`]``
 - Right: `[openapi#73](https://github.com/Inkflockteam/openapi/issues/73)`, ``[`typescript-best-practices`](skills/typescript-best-practices/SKILL.md)``
-
-## Chat replies
-
-Apply `skill://unslop` to all chat replies.
