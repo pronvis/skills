@@ -59,12 +59,17 @@ task:
     fixer: "@opus"
     reviewer: "@gpt-sol"
     scout: "@opus"
-    task: ["@fable", "@opus"]
-    poteto-agent: ["@fable", "@opus"]
+    task:
+      - "@fable"
+      - "@opus"
+    poteto-agent:
+      - "@fable"
+      - "@opus"
   maxRecursionDepth: 3
 retry:
   enabled: true
   modelFallback: true
+  fallbackRevertPolicy: never
 extensions:
   - /Users/pronvis/bin/scripts/agents/omp-hook.mjs
 dev:
@@ -83,4 +88,4 @@ externalThinking: false
 edit:
   mode: hashline
 github:
-  enabled: false
+  enabled: true
