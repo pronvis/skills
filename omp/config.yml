@@ -1,0 +1,86 @@
+modelRoles:
+  default: anthropic/claude-opus-5:high
+  task: anthropic/claude-opus-5:high
+  smol: anthropic/claude-sonnet-5:high
+  slow: anthropic/claude-fable-5-1:high
+  commit: openai-codex/gpt-5.6-sol:medium
+  tiny: anthropic/claude-sonnet-5:medium
+  plan: anthropic/claude-fable-5-1:high
+  vision: anthropic/claude-fable-5-1:high
+  review: anthropic/claude-opus-5:high
+  advisor: openai-codex/gpt-5.6-sol:high
+  gpt-sol: openai-codex/gpt-5.6-sol:high
+  opus: anthropic/claude-opus-5:high
+  fable: anthropic/claude-fable-5-1:high
+  sonnet: anthropic/claude-sonnet-5:high
+  gpt-astra: openai-codex/gpt-6-astra:high
+symbolPreset: nerd
+composer:
+  shape: claude
+theme:
+  dark: titanium
+  light: light
+setupVersion: 2
+statusLine:
+  preset: custom
+  leftSegments:
+    - pi
+    - model
+    - mode
+    - path
+    - git
+    - pr
+    - session
+    - subagents
+  rightSegments:
+    - session_name
+    - token_in
+    - token_out
+    - cache_read
+    - cache_write
+    - token_rate
+    - cost
+    - context_pct
+    - usage
+    - time_spent
+  segmentOptions:
+    model:
+      showThinkingLevel: true
+    path:
+      abbreviate: true
+      maxLength: 60
+    git:
+      showBranch: true
+      showStaged: true
+      showUnstaged: true
+      showUntracked: true
+task:
+  agentModelOverrides:
+    fixer: "@opus"
+    reviewer: "@gpt-sol"
+    scout: "@opus"
+    task: ["@fable", "@opus"]
+    poteto-agent: ["@fable", "@opus"]
+  maxRecursionDepth: 3
+retry:
+  enabled: true
+  modelFallback: true
+extensions:
+  - /Users/pronvis/bin/scripts/agents/omp-hook.mjs
+dev:
+  autoqaConsent: granted
+cycleOrder:
+  - smol
+  - default
+  - slow
+  - gpt-sol
+  - gpt-astra
+extendedContext: true
+skills:
+  customDirectories:
+    - /Users/pronvis/it/skills/skills
+externalThinking: false
+edit:
+  mode: hashline
+github:
+  enabled: false
