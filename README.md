@@ -14,7 +14,7 @@ Agent skills for the omp (Oh My Pi) coding agent: 70 vendored from three upstrea
 ```yaml
 skills:
   customDirectories:
-    - /Users/pronvis/it/skills/skills
+    - ~/it/skills/skills
 ```
 
 Legend. Each skill name links to its vendored `SKILL.md`; the Source column links the upstream original. **✱** the text was rewritten for omp; unmarked skills are byte-identical to upstream. **●** the model may auto-select it; the other 51 carry upstream's `disable-model-invocation: true` and are reached with `/skill:<name>` or by reading `skill://<name>`.

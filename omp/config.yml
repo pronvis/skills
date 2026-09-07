@@ -79,7 +79,7 @@ retry:
   modelFallback: true
   fallbackRevertPolicy: never
 extensions:
-  - /Users/pronvis/bin/scripts/agents/omp-hook.mjs
+  - ~/bin/scripts/agents/omp-hook.mjs
 dev:
   autoqaConsent: granted
 cycleOrder:
@@ -91,7 +91,7 @@ cycleOrder:
 extendedContext: true
 skills:
   customDirectories:
-    - /Users/pronvis/it/skills/skills
+    - ~/it/skills/skills
 externalThinking: false
 edit:
   mode: hashline
