@@ -55,6 +55,8 @@ statusLine:
       showUnstaged: true
       showUntracked: true
 task:
+  enableLsp: true
+  showResolvedModelBadge: true
   agentModelOverrides:
     fixer:
       - "@opus"
@@ -95,3 +97,7 @@ edit:
   mode: hashline
 github:
   enabled: true
+display:
+  showTokenUsage: true
+  showTurnTime: true
+  cacheMissMarker: true

@@ -1,0 +1,7 @@
+{
+  "servers": {
+    "rust-analyzer": {
+      "command": "/usr/local/bin/rust-analyzer-mac"
+    }
+  }
+}
