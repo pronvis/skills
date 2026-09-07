@@ -56,15 +56,21 @@ statusLine:
       showUntracked: true
 task:
   agentModelOverrides:
-    fixer: "@opus"
+    fixer:
+      - "@opus"
+      - "@gpt-sol"
     reviewer: "@gpt-sol"
-    scout: "@opus"
+    scout: 
+      - "@opus"
+      - "@gpt-sol"
     task:
       - "@fable"
       - "@opus"
+      - "@gpt-sol"
     poteto-agent:
       - "@fable"
       - "@opus"
+      - "@gpt-sol"
   maxRecursionDepth: 3
 retry:
   enabled: true
