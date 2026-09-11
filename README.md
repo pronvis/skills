@@ -1,12 +1,13 @@
 # skills
 
-Agent skills for the omp (Oh My Pi) coding agent: 70 vendored from three upstreams and ported to omp conventions, plus one authored here. This repo is the only skill source omp loads; `~/.agents/skills` is empty by design.
+Agent skills for the omp (Oh My Pi) coding agent, vendored from upstream projects and ported to omp conventions, plus one authored here. This repo is the only skill source omp loads; `~/.agents/skills` is empty by design.
 
 | Upstream | Pinned at | Skills | Path |
 |---|---|---|---|
 | [cursor/plugins](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166) | `7314f72` | 43 | `pstack/skills`, `cursor-team-kit/skills` |
 | [mattpocock/skills](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015) | `3cca18b` | 25 | `skills/engineering`, `skills/productivity` |
 | [affaan-m/ECC](https://github.com/affaan-m/ECC/blob/e04ea0b9cc8248686edf5ac751cadff550e162b8) | `e04ea0b` | 2 | `skills` |
+| [umputun/cc-thingz](https://github.com/umputun/cc-thingz/tree/fb520ca89c606f806408ca56874d8895fe9b83b3) | `fb520ca` | 1 | `plugins/workflow/skills` |
 | yours | n/a | 1 | authored in this repo |
 
 `skills/` holds the skill packs, one directory each. `agents/` holds omp task-agent definitions, symlinked into `~/.omp/agent/agents/`. Register the pack by adding this to `~/.omp/agent/config.yml`:
@@ -45,6 +46,12 @@ Legend. Each skill name links to its vendored `SKILL.md`; the Source column link
 | [`why`](skills/why/SKILL.md) ✱ | Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/skills/why/SKILL.md) |
 | [`pstack-tdd`](skills/pstack-tdd/SKILL.md) | Use only when the user explicitly asks for TDD, a failing test, or a regression test, OR when the bug has an obvious cheap local test target. (upstream `tdd`) | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/skills/tdd/SKILL.md) |
 | [`typescript-best-practices`](skills/typescript-best-practices/SKILL.md) | TypeScript best practices. Use when reading or editing any .ts or .tsx file. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/skills/typescript-best-practices/SKILL.md) |
+
+## Workflow (cc-thingz)
+
+| Skill | Purpose | Source |
+|---|---|---|
+| [`backlog`](skills/backlog/SKILL.md) ✱● | Read, triage, and maintain deferred work in `docs/backlog/`, one file per item. | [umputun/cc-thingz](https://github.com/umputun/cc-thingz/blob/fb520ca89c606f806408ca56874d8895fe9b83b3/plugins/workflow/skills/backlog/SKILL.md) |
 
 ## Verification (pstack, cursor-team-kit)
 
@@ -150,6 +157,8 @@ omp resolves a subagent's model by agent name, so each panel seat is its own def
 
 The pstack pack assumed Cursor's tools, model slugs and built-in skills. The mattpocock packs were already harness-agnostic apart from Claude Code's `Skill` tool, in 15 places. The ECC Rust skills needed nothing: they contain no harness references.
 
+The cc-thingz backlog skill uses omp's `ask` tool and `/skill:backlog` invocation. Its Claude Code `allowed-tools` restriction and widget-specific layout assumption were removed.
+
 | Upstream | omp |
 |---|---|
 | `subagent_type: "X"` | `task` item with `agent: "X"` |
@@ -175,3 +184,4 @@ Every vendored skill is MIT licensed by its original author. The upstream licens
 | cursor/plugins (pstack, cursor-team-kit) | Lauren Tan | [`LICENSES/pstack-cursor-plugins-MIT.txt`](LICENSES/pstack-cursor-plugins-MIT.txt) |
 | mattpocock/skills | Matt Pocock | [`LICENSES/mattpocock-skills-MIT.txt`](LICENSES/mattpocock-skills-MIT.txt) |
 | affaan-m/ECC | Affaan Mustafa | [`LICENSES/affaan-m-ECC-MIT.txt`](LICENSES/affaan-m-ECC-MIT.txt) |
+| umputun/cc-thingz | Umputun | [`LICENSES/umputun-cc-thingz-MIT.txt`](LICENSES/umputun-cc-thingz-MIT.txt) |

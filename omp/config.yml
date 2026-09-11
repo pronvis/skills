@@ -61,7 +61,8 @@ task:
     fixer:
       - "@opus"
       - "@gpt-sol"
-    reviewer: "@gpt-sol"
+    reviewer:
+      - "@gpt-sol"
     scout: 
       - "@opus"
       - "@gpt-sol"
