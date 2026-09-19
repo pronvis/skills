@@ -9,11 +9,15 @@ modelRoles:
   vision: anthropic/claude-fable-5-1:high
   review: anthropic/claude-opus-5:high
   advisor: openai-codex/gpt-5.6-sol:high
-  gpt-sol: openai-codex/gpt-5.6-sol:high
-  opus: anthropic/claude-opus-5:high
   fable: anthropic/claude-fable-5-1:high
+  opus: anthropic/claude-opus-5:high
   sonnet: anthropic/claude-sonnet-5:high
+  haiku: anthropic/claude-haiku-5:high
   gpt-astra: openai-codex/gpt-6-astra:high
+  gpt-sol: openai-codex/gpt-5.6-sol:high
+  gpt-terra: openai-codex/gpt-5.6-terra:high
+  gpt-luna: openai-codex/gpt-5.6-luna:high
+  kimi-k3: kimi-code/k3
 symbolPreset: nerd
 composer:
   shape: claude
@@ -59,20 +63,21 @@ task:
   showResolvedModelBadge: true
   agentModelOverrides:
     fixer:
-      - "@opus"
       - "@gpt-sol"
+      - "@opus"
     reviewer:
+      - "@opus"
       - "@gpt-sol"
     scout: 
+      - "@gpt-terra"
       - "@opus"
-      - "@gpt-sol"
     task:
-      - "@fable"
-      - "@opus"
       - "@gpt-sol"
-    poteto-agent:
-      - "@fable"
       - "@opus"
+      - "@fable"
+    poteto-agent:
+      - "@opus"
+      - "@fable"
       - "@gpt-sol"
   maxRecursionDepth: 3
 retry:
@@ -89,6 +94,7 @@ cycleOrder:
   - slow
   - gpt-sol
   - gpt-astra
+  - kimi-k3
 extendedContext: true
 skills:
   customDirectories:
@@ -102,3 +108,5 @@ display:
   showTokenUsage: true
   showTurnTime: true
   cacheMissMarker: true
+browser:
+  relay: true
