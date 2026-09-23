@@ -99,6 +99,7 @@ extendedContext: true
 skills:
   customDirectories:
     - ~/it/skills/skills
+    - ./skills
 externalThinking: false
 edit:
   mode: hashline
