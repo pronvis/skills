@@ -63,21 +63,21 @@ task:
   showResolvedModelBadge: true
   agentModelOverrides:
     fixer:
-      - "@gpt-sol"
       - "@opus"
+      - "@gpt-sol"
     reviewer:
-      - "@opus"
       - "@gpt-sol"
-    scout: 
+      - "@opus"
+    scout:
       - "@gpt-terra"
       - "@opus"
     task:
+      - "@fable"
       - "@gpt-sol"
       - "@opus"
-      - "@fable"
     poteto-agent:
-      - "@opus"
       - "@fable"
+      - "@opus"
       - "@gpt-sol"
   maxRecursionDepth: 3
 retry:
