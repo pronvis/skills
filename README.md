@@ -5,7 +5,7 @@ Agent skills for the omp (Oh My Pi) coding agent, vendored from upstream project
 | Upstream | Pinned at | Skills | Path |
 |---|---|---|---|
 | [cursor/plugins](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166) | `7314f72` | 43 | `pstack/skills`, `cursor-team-kit/skills` |
-| [mattpocock/skills](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015) | `3cca18b` | 25 | `skills/engineering`, `skills/productivity` |
+| [mattpocock/skills](https://github.com/mattpocock/skills/tree/24fe0ef7737efae15c87225755e9f6f5965e4888) | [`v1.3.1`](https://github.com/mattpocock/skills/releases/tag/v1.3.1), `24fe0ef` | 27 | `skills/engineering`, `skills/productivity` |
 | [affaan-m/ECC](https://github.com/affaan-m/ECC/blob/e04ea0b9cc8248686edf5ac751cadff550e162b8) | `e04ea0b` | 2 | `skills` |
 | [umputun/cc-thingz](https://github.com/umputun/cc-thingz/tree/fb520ca89c606f806408ca56874d8895fe9b83b3) | `fb520ca` | 1 | `plugins/workflow/skills` |
 | yours | n/a | 1 | authored in this repo |
@@ -18,7 +18,7 @@ skills:
     - ~/it/skills/skills
 ```
 
-Legend. Each skill name links to its vendored `SKILL.md`; the Source column links the upstream original. **✱** the text was rewritten for omp; unmarked skills are byte-identical to upstream. **●** the model may auto-select it; the other 51 carry upstream's `disable-model-invocation: true` and are reached with `/skill:<name>` or by reading `skill://<name>`.
+Legend. Each skill name links to its vendored `SKILL.md`; the Source column links the upstream original. **✱** marks a local adaptation; unmarked skills are byte-identical to upstream. **●** means the model may auto-select it. Skills without **●** carry `disable-model-invocation: true` and are reached with `/skill:<name>` or by reading `skill://<name>`.
 
 
 ## Entry point (pstack)
@@ -94,36 +94,38 @@ Legend. Each skill name links to its vendored `SKILL.md`; the Source column link
 
 | Skill | Purpose | Source |
 |---|---|---|
-| [`ask-matt`](skills/ask-matt/SKILL.md) | Ask which skill or flow fits your situation. A router over the skills in this repo. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/ask-matt/SKILL.md) |
-| [`code-review`](skills/code-review/SKILL.md) ● | Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented… | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/code-review/SKILL.md) |
-| [`codebase-design`](skills/codebase-design/SKILL.md) ● | Shared vocabulary for designing deep modules. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/codebase-design/SKILL.md) |
-| [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) ● | Diagnosis loop for hard bugs and performance regressions. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/diagnosing-bugs/SKILL.md) |
-| [`domain-modeling`](skills/domain-modeling/SKILL.md) ● | Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a CONTEXT.md, or recording or editing an ADR. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/domain-modeling/SKILL.md) |
-| [`grill-with-docs`](skills/grill-with-docs/SKILL.md) ✱ | A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/grill-with-docs/SKILL.md) |
-| [`implement`](skills/implement/SKILL.md) | Implement a piece of work based on a spec or set of tickets. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/implement/SKILL.md) |
-| [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) ✱ | Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/improve-codebase-architecture/SKILL.md) |
-| [`prototype`](skills/prototype/SKILL.md) ● | Build a throwaway prototype to answer a design question. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/prototype/SKILL.md) |
-| [`research`](skills/research/SKILL.md) ● | Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/research/SKILL.md) |
-| [`resolving-merge-conflicts`](skills/resolving-merge-conflicts/SKILL.md) ● | Use when you need to resolve an in-progress git merge/rebase conflict. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/resolving-merge-conflicts/SKILL.md) |
-| [`setup-matt-pocock-skills`](skills/setup-matt-pocock-skills/SKILL.md) | Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/setup-matt-pocock-skills/SKILL.md) |
-| [`tdd`](skills/tdd/SKILL.md) ✱● | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/tdd/SKILL.md) |
-| [`to-spec`](skills/to-spec/SKILL.md) | Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/to-spec/SKILL.md) |
-| [`to-tickets`](skills/to-tickets/SKILL.md) | Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured… | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/to-tickets/SKILL.md) |
-| [`triage`](skills/triage/SKILL.md) ✱ | Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/triage/SKILL.md) |
-| [`wayfinder`](skills/wayfinder/SKILL.md) ✱ | Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a… | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/wayfinder/SKILL.md) |
-| [`wizard`](skills/wizard/SKILL.md) ● | Generate an interactive bash wizard that walks a human through steps only they can perform. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/engineering/wizard/SKILL.md) |
+| [`ask-matt`](skills/ask-matt/SKILL.md) ✱ | Ask which skill or flow fits your situation. A router over the skills in this repo. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/ask-matt/SKILL.md) |
+| [`code-review`](skills/code-review/SKILL.md) ✱● | Review changes since a fixed point against the repo's standards and the work's spec. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/code-review/SKILL.md) |
+| [`codebase-design`](skills/codebase-design/SKILL.md) ● | Shared vocabulary for designing deep modules. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/codebase-design/SKILL.md) |
+| [`diagnosing-bugs`](skills/diagnosing-bugs/SKILL.md) ● | Diagnosis loop for hard bugs and performance regressions. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/diagnosing-bugs/SKILL.md) |
+| [`domain-modeling`](skills/domain-modeling/SKILL.md) ● | Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/domain-modeling/SKILL.md) |
+| [`grill-with-docs`](skills/grill-with-docs/SKILL.md) ✱ | Interview to sharpen a plan or design, recording domain terms and ADRs as decisions land. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/grill-with-docs/SKILL.md) |
+| [`implement`](skills/implement/SKILL.md) | Implement a piece of work based on a spec or set of tickets. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/implement/SKILL.md) |
+| [`implement-spec`](skills/implement-spec/SKILL.md) ✱ | Implement a whole spec with parallel worktree agents, merging completed tickets onto one integration branch. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/implement-spec/SKILL.md) |
+| [`improve-codebase-architecture`](skills/improve-codebase-architecture/SKILL.md) ✱ | Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/improve-codebase-architecture/SKILL.md) |
+| [`pr`](skills/pr/SKILL.md) ● | Write a PR body with a visual summary, before/after evidence, and a merge-risk assessment. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/pr/SKILL.md) |
+| [`prototype`](skills/prototype/SKILL.md) ✱● | Build a throwaway prototype to answer a design question. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/prototype/SKILL.md) |
+| [`research`](skills/research/SKILL.md) ● | Investigate a question against primary sources and capture the findings as a Markdown file in the repo. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/research/SKILL.md) |
+| [`retro`](skills/retro/SKILL.md) ✱ | Review a coding session and suggest improvements to the agent's environment and automated checks. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/retro/SKILL.md) |
+| [`setup-matt-pocock-skills`](skills/setup-matt-pocock-skills/SKILL.md) | Configure the engineering skills' issue tracker, triage labels, and domain doc layout. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/setup-matt-pocock-skills/SKILL.md) |
+| [`tdd`](skills/tdd/SKILL.md) ✱● | Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/tdd/SKILL.md) |
+| [`to-spec`](skills/to-spec/SKILL.md) | Turn the current conversation into a spec and publish it to the project issue tracker, without another interview. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/to-spec/SKILL.md) |
+| [`to-tickets`](skills/to-tickets/SKILL.md) | Break a plan, spec, or conversation into tracer-bullet tickets with explicit blocking edges. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/to-tickets/SKILL.md) |
+| [`triage`](skills/triage/SKILL.md) ✱ | Move issues and external PRs through triage, verify them, resolve open questions, and write agent-ready briefs. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/triage/SKILL.md) |
+| [`wayfinder`](skills/wayfinder/SKILL.md) ✱ | Plan work larger than one agent session as a shared map of decision tickets on the issue tracker. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/wayfinder/SKILL.md) |
+| [`wizard`](skills/wizard/SKILL.md) ● | Generate an interactive bash wizard that walks a human through steps only they can perform. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/engineering/wizard/SKILL.md) |
 
 ## Productivity (mattpocock)
 
 | Skill | Purpose | Source |
 |---|---|---|
-| [`grill-me`](skills/grill-me/SKILL.md) ✱ | A relentless interview to sharpen a plan or design. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/grill-me/SKILL.md) |
-| [`grilling`](skills/grilling/SKILL.md) ● | Grill the user relentlessly about a plan, decision, or idea. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/grilling/SKILL.md) |
-| [`handoff`](skills/handoff/SKILL.md) ✱ | Compact the current conversation into a handoff document for another agent to pick up. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/handoff/SKILL.md) |
-| [`teach`](skills/teach/SKILL.md) | Teach the user a new skill or concept, within this workspace. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/teach/SKILL.md) |
-| [`to-questionnaire`](skills/to-questionnaire/SKILL.md) | Turn a decision you can't fully answer into a questionnaire for someone else to fill in. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/to-questionnaire/SKILL.md) |
-| [`wait-what`](skills/wait-what/SKILL.md) | Stop. That last message did not land: re-pitch it. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/wait-what/SKILL.md) |
-| [`writing-for-agents`](skills/writing-for-agents/SKILL.md) ● | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. | [mattpocock](https://github.com/mattpocock/skills/blob/3cca18b368ae95cdbdebbff572ccafa662551015/skills/productivity/writing-for-agents/SKILL.md) |
+| [`grill-me`](skills/grill-me/SKILL.md) ✱ | A relentless interview to sharpen a plan or design. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/grill-me/SKILL.md) |
+| [`grilling`](skills/grilling/SKILL.md) ● | Grill the user relentlessly about a plan, decision, or idea. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/grilling/SKILL.md) |
+| [`handoff`](skills/handoff/SKILL.md) ✱ | Compact the current conversation into a handoff document for another agent to pick up. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/handoff/SKILL.md) |
+| [`teach`](skills/teach/SKILL.md) | Teach the user a new skill or concept, within this workspace. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/teach/SKILL.md) |
+| [`to-questionnaire`](skills/to-questionnaire/SKILL.md) | Turn a decision you can't fully answer into a questionnaire for someone else to fill in. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/to-questionnaire/SKILL.md) |
+| [`wait-what`](skills/wait-what/SKILL.md) | Re-pitch the last message in plain English using the project's glossary. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/wait-what/SKILL.md) |
+| [`writing-for-agents`](skills/writing-for-agents/SKILL.md) ● | Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md. | [mattpocock](https://github.com/mattpocock/skills/blob/24fe0ef7737efae15c87225755e9f6f5965e4888/skills/productivity/writing-for-agents/SKILL.md) |
 
 ## Rust (ECC)
 
@@ -155,7 +157,7 @@ omp resolves a subagent's model by agent name, so each panel seat is its own def
 
 ## Ports applied
 
-The pstack pack assumed Cursor's tools, model slugs and built-in skills. The mattpocock packs were already harness-agnostic apart from Claude Code's `Skill` tool, in 15 places. The ECC Rust skills needed nothing: they contain no harness references.
+The pstack pack assumed Cursor's tools, model slugs and built-in skills. The mattpocock packs use omp's `read` tool for cross-skill loading. Local default-branch examples retain `master`. The ECC Rust skills needed no tool changes.
 
 The cc-thingz backlog skill uses omp's `ask` tool and `/skill:backlog` invocation. Its Claude Code `allowed-tools` restriction and widget-specific layout assumption were removed.
 
@@ -174,6 +176,17 @@ The cc-thingz backlog skill uses omp's `ask` tool and `/skill:backlog` invocatio
 | cloud agents, Cursor dashboard | local `task` items; `hub list` / `hub jobs`; `~/.omp/agent/sessions/` |
 | `git show origin/master:pstack/skills/…` | `skill://<name>` |
 | `.cursor/worktrees` | `omp worktree list --json` |
+
+## Matt Pocock v1.3.1 update
+
+Synced the engineering and productivity packs to [v1.3.1](https://github.com/mattpocock/skills/releases/tag/v1.3.1), commit `24fe0ef7737efae15c87225755e9f6f5965e4888`.
+
+- Added [`implement-spec`](skills/implement-spec/SKILL.md), [`pr`](skills/pr/SKILL.md), and [`retro`](skills/retro/SKILL.md), including their upstream agent metadata. Updated [`ask-matt`](skills/ask-matt/SKILL.md) to route them and correct the post-debugging handoff.
+- Removed `resolving-merge-conflicts`, matching upstream. Resolve merge and rebase conflicts without a dedicated skill.
+- Migrated domain-doc consumers and the format reference to `GLOSSARY.md`, `GLOSSARY-MAP.md`, and [`GLOSSARY-FORMAT.md`](skills/domain-modeling/GLOSSARY-FORMAT.md). In consuming repos, rename existing `CONTEXT.md` and `CONTEXT-MAP.md` files to the new names and update their links.
+- Preserved local tool adaptations and default-branch examples. `implement-spec` creates Git worktrees with shared refs and passes their absolute paths to omp tasks. Read-only scouts return findings for the coordinator to save.
+
+The [`pr` credits](skills/pr/CREDITS.md) retain upstream's attribution to Dex Horthy for the summary visuals. Matt Pocock's MIT license is unchanged.
 
 ## License
 
