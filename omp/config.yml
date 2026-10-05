@@ -69,8 +69,8 @@ task:
       - "@gpt-sol"
       - "@opus"
     scout:
-      - "@gpt-terra"
       - "@opus"
+      - "@gpt-sol"
     task:
       - "@fable"
       - "@opus"
