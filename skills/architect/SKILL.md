@@ -28,11 +28,11 @@ Skip Phase A only when the work is genuinely greenfield with no surrounding syst
 
 ## Phase B: Sketch
 
-Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`: the caller's usage written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
+Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts, sized per its Frame step: the full panel for a decision that clears the arena's size threshold, one runner plus one critic below it, or a sketch you write yourself with the sizing choice recorded in the rationale's "Synthesis decision" section. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`: the caller's usage written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
 
 Use the `poteto-runner-opus`, `poteto-runner-gpt`, and `poteto-runner-fable` agents as the design runners (models `@opus`, `@gpt-sol`, `@fable`; only two model families are available, anthropic and openai, so two runners share a family).
 
-Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
+Design it twice. Require at least two structurally distinct shapes before synthesis, even when the first looks sufficient: separate candidates on the full panel, and the "Alternatives considered" section of the single package below the threshold. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
 
 Screen every candidate against [`references/design-red-flags.md`](references/design-red-flags.md) before synthesis. Reject or revise shallow modules, information leakage, temporal decomposition, and pass-through methods.
 

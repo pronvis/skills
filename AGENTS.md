@@ -2,7 +2,7 @@
 
 ## Chat replies
 
-Apply `skill://unslop` to all chat replies.
+Read `skill://unslop` once per session, and again after a compaction; apply it to every chat reply.
 
 ## Cross-repo references
 
