@@ -1,0 +1,7 @@
+providers:
+  openai-codex:
+    modelOverrides:
+      gpt-6-astra:
+        contextWindow: 650000
+      gpt-6.1-sol:
+        contextWindow: 650000

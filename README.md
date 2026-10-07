@@ -18,6 +18,8 @@ skills:
     - ~/it/skills/skills
 ```
 
+Provider/model overrides live in [`omp/models.yml`](omp/models.yml), symlinked to `~/.omp/agent/models.yml`. The dotfiles installer's `links` phase installs this symlink alongside the other omp configuration files.
+
 Legend. Each skill name links to its vendored `SKILL.md`; the Source column links the upstream original. **✱** marks a local adaptation; unmarked skills are byte-identical to upstream. **●** means the model may auto-select it. Skills without **●** carry `disable-model-invocation: true` and are reached with `/skill:<name>` or by reading `skill://<name>`.
 
 
