@@ -64,14 +64,18 @@ Fix the log, not the story. If the work diverged from what a row claims, the row
 
 ## Cross-model review of the trail
 
-Before handing back, you must spawn a subagent on a different model family from the root session's. The root writes the trail, so its family is the one to differ from. Set the reviewer's model explicitly in the `task` call's `model` field; that selector is the `reviewed by` value below. Self-review is not a substitute; the point is fresh eyes you cannot bring yourself. The subagent reads the audit trail and the run's transcripts (`history://Main` and the subagents `history://` lists), then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky.
+Before handing back, you must obtain a subagent review from a different model family than the root session's. Select the reviewer through the controls the current `task` schema exposes. Use an explicit model selector only when supported; otherwise choose a configured agent route with the intended family.
+
+Verify the reviewer's actual model and family in this run's execution metadata. A requested model, agent name or earlier session's model does not prove which model performed this review. Same-family fallback does not satisfy this gate. Try another available authorized route. If none can supply the required family, report the gate as blocked and name the attempted routes. Keep the requirement intact; changing model settings still requires the environment's normal authorization.
+
+The subagent reads the audit trail and the run's transcripts (`history://Main` and the subagents `history://` lists), then flags what the user should pay attention to. This is a scan for risky decisions and missing evidence, not a redo of the work.
 
 - Decisions logged with weak or absent evidence.
 - Verification steps skipped or claimed without proof in the transcript.
 - Choices that look risky in hindsight (premature, scope-creeping, papering over a symptom).
 - Gaps the user would otherwise miss on a casual skim.
 
-Every reply for a run that produced a trail ends with an "Attention" section. Lead with the reviewer's model on its own line (`reviewed by <model>`), then list each flag pointing to specific rows or moments. "No flags" is a valid value; the model name is not. The self-audit asks if the log told the truth; this asks what the user should still scrutinize even when it did.
+Every reply for a run that produced a trail ends with an "Attention" section. Lead with the reviewer's actual model on its own line (`reviewed by <model>`), then list each flag pointing to specific rows or moments. State any fallback and whether the different-family gate was satisfied. If no reviewer ran, say so instead of naming the requested model as the reviewer. "No flags" is a valid audit result only after a review ran.
 
 ## Reviewing the trail
 
