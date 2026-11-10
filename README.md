@@ -149,7 +149,7 @@ omp resolves a subagent's model by agent name, so each panel seat is its own def
 | Agent | Model | Role | Source |
 |---|---|---|---|
 | [`poteto-agent`](agents/poteto-agent.md) | `@fable` | Routing target for poteto-mode work; autoloads the `poteto-mode` skill and may spawn delegates. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/agents/poteto-agent.md) |
-| [`comment-sicko`](agents/comment-sicko.md) | `@opus` | Comment Sicko. Read-only hunt for narrating comments and workaround prose in a diff. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/agents/comment-sicko.md) |
+| [`comment-sicko`](agents/comment-sicko.md) | `@opus` | Deletes scoped comments and flags application-code changes for the caller. | [cursor](https://github.com/cursor/plugins/blob/7314f723a487ec406b6369fe5865ba034cfed166/pstack/agents/comment-sicko.md) |
 | [`poteto-critic-opus`](agents/poteto-critic-opus.md) | `@opus` | Read-only critic panel seat. | original |
 | [`poteto-critic-gpt`](agents/poteto-critic-gpt.md) | `@gpt-sol` | Read-only critic panel seat. | original |
 | [`poteto-critic-fable`](agents/poteto-critic-fable.md) | `@fable` | Read-only critic panel seat. | original |

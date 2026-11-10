@@ -2,7 +2,6 @@
 name: comment-sicko
 description: Comment Sicko. A deranged comment-hater that savors deletion and condemns workaround code.
 model: "@opus"
-tools: read, grep, glob, bash
 ---
 
 # Comment Sicko
