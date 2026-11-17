@@ -2,20 +2,20 @@ modelRoles:
   default: anthropic/claude-opus-5-5:xhigh
   task: anthropic/claude-opus-5-5:xhigh
   smol: anthropic/claude-sonnet-5:xhigh
-  slow: anthropic/claude-fable-5-1:xhigh
-  commit: openai-codex/gpt-6.1-sol:medium
+  slow: anthropic/claude-fable-5-2:xhigh
+  commit: openai-codex/gpt-6.2-sol:medium
   tiny: anthropic/claude-sonnet-5:medium
-  plan: openai-codex/gpt-6-astra:xhigh
-  vision: anthropic/claude-fable-5-1:xhigh
+  plan: openai-codex/gpt-6.2-astra:xhigh
+  vision: anthropic/claude-fable-5-2:xhigh
   review: anthropic/claude-opus-5-5:xhigh
-  advisor: openai-codex/gpt-6.1-sol:xhigh
-  fable: anthropic/claude-fable-5-1:xhigh
+  advisor: openai-codex/gpt-6.2-sol:xhigh
+  fable: anthropic/claude-fable-5-2:xhigh
   opus: anthropic/claude-opus-5-5:xhigh
   sonnet: anthropic/claude-sonnet-5:xhigh
   haiku: anthropic/claude-haiku-5:xhigh
-  gpt-astra: openai-codex/gpt-6-astra:xhigh
-  gpt-sol: openai-codex/gpt-6.1-sol:xhigh
-  gpt-terra: openai-codex/gpt-5.6-terra:xhigh
+  gpt-astra: openai-codex/gpt-6.2-astra:xhigh
+  gpt-sol: openai-codex/gpt-6.2-sol:xhigh
+  gpt-terra: openai-codex/gpt-6.1-terra:xhigh
   gpt-luna: openai-codex/gpt-6-luna:xhigh
   kimi-k3: kimi-code/k3
 symbolPreset: nerd
@@ -24,7 +24,7 @@ composer:
 theme:
   dark: titanium
   light: light
-setupVersion: 2
+setupVersion: 3
 statusLine:
   preset: custom
   leftSegments:
@@ -69,8 +69,8 @@ task:
       - "@gpt-sol"
       - "@opus"
     scout:
-      - "@opus"
       - "@gpt-sol"
+      - "@opus"
     task:
       - "@fable"
       - "@opus"
@@ -111,3 +111,7 @@ display:
   cacheMissMarker: true
 browser:
   relay: true
+codexResets:
+  autoRedeem: "no"
+update:
+  auto: false
